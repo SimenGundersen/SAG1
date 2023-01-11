@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, inital-scale=1.0"> 
+    <title>variabler Intro</title>
+</head>
+<body>
+    <div id="output"></div>
+    <button onclick="SetNum16()">Set number to 16</button>
+    <button onclick="SetNum47()">Set number to 47</button>
+
+    <script>    
+
+        // var number = 5; //int 
+        // var floatnumber = 5.5; //kommaseparert tall
+        // var text = "en liten tekstbit";  //string
+        // var enkeltTegn = 'a'; //char
+        // var booleans = true;  // booleans
+
+        var OutputDiv = document.GetElementByID('output');
+        var numToShow = 0;
+
+    function SetNum16(){
+            numToShow = 16;
+            outputDiv.innerHTML = numToShow;
+         }
+
+     function SetNum47(){
+            numToShow = 47;
+            outputDiv.innerHTML = numToShow;
+         }
+
+    </script>
+    
+</body>
+</html>
