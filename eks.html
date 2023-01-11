@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" ceontent="width=device-width, inital-scale=1.0">
+</head>
+
+<body>
+    <script>
+        function testScopes(){
+            var hello = "var hello";
+            let hello2 = "Let Hello";
+
+            console.log(hello, hello2); // Var Hello & Let Hello
+
+            {
+            
+            var yo = "var yo i obj";
+            let yo2 = "Let yo i obj";
+
+            console.log(yo, yo2); // Var Hello & Let Hello
+
+            }  
+            
+            console.log(yo); // let yo
+            console.log(yo2); //error! let får man bare tak i i samme scope, her er den pakket inn i et objekt og "gjemt bort" :D
+
+        }
+
+
+        testcopes();
+
+
+    </script>
+</body>
+</html>
