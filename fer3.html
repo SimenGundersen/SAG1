@@ -1,0 +1,25 @@
+<doctype html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <p>Ferdighet 3 - spesialtilfelle, this og gjøre noe med et elementet man trykker på
+        samenlign dette eksempelet med "ferdighet 2 - one click - kjøre funksjon som endrer innenhtml, ut fra id"
+<h2 id="z" onclick="doSomething(this)">AAAAAAAAAA</h2>
+<h2 id="y" onclick="doSomething(this)">BBBBBBBBBB</h2>
+
+<script>
+        function doSomething(etnavnduvelgerselv) {
+            // Nå er etNavnDuVelgerSelv det samme som om vi hadde kjørt:
+            // var etNavnDuVelgerSelv = document.GetElementById('z');
+            // eller
+            // var etNavnDuVelgerSelv = document.GetElementByID('y');
+            // HVIS og bare hvis du trykker på akkurat det elementet som har id=z
+            etNavnduVelgerSelv.innerHTML = 'CCCCCCCCCCCCCC';
+        }
+    </Script>
+</body>
+</html>
