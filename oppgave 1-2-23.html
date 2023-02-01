@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MVC Color Selector</title>
+  </head>
+  <body>
+    <h1>MVC Color Selector</h1>
+
+    <label for="color-select">Choose a color:</label>
+    <select id="color-select">
+      <option value="black">Black</option>
+      <option value="darkblue">Dark Blue</option>
+      <option value="lightgray">Light Gray</option>
+      <option value="lightgreen">Light Green</option>
+      <option value="lightred">Light Red</option>
+    </select>
+
+    <div id="color-box"></div>
+
+    <script>
+      const model = {
+        color: "black",
+        foreground: "white"
+      };
+
+      const view = {
+        updateColorBox: function() {
+          const colorBox = document.getElementById("color-box");
+          colorBox.style.backgroundColor = model.color;
+          colorBox.style.color = model.foreground;
+        }
+      };
+
+      const controller = {
+        updateModel: function() {
+          model.color = document.getElementById("color-select").value;
+          model.foreground =
+            model.color === "black" || model.color === "darkblue"
+              ? "white"
+              : "black";
+        },
+        init: function() {
+          const colorSelect = document.getElementById("color-select");
+          colorSelect.addEventListener("change", function() {
+            controller.updateModel();
+            view.updateColorBox();
+          });
+        }
+      };
+
+      controller.init();
+    </script>
+  </body>
+</html>
+
