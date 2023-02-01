@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamagotchi</title>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+
+    .pet-info {
+      display: flex;
+      justify-content: space-between;
+      width: 300px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Tamagotchi</h1>
+    <div class="pet-info">
+      <p>Hunger: <span id="hunger">100</span>%</p>
+      <p>Happiness: <span id="happiness">100</span>%</p>
+    </div>
+    <div class="buttons">
+      <button onclick="feed()">Feed</button>
+      <button onclick="play()">Play</button>
+    </div>
+  </div>
+  <script>
+    const hungerSpan = document.querySelector('#hunger');
+    const happinessSpan = document.querySelector('#happiness');
+
+    let hunger = 100;
+    let happiness = 100;
+
+    function feed() {
+      hunger += 10;
+      if (hunger > 100) {
+        hunger = 100;
+      }
+      hungerSpan.innerText = hunger;
+    }
+
+    function play() {
+      happiness += 10;
+      if (happiness > 100) {
+        happiness = 100;
+      }
+      happinessSpan.innerText = happiness;
+    }
+
+    setInterval(function() {
+      hunger -= 1;
+      happiness -= 1;
+
+      hungerSpan.innerText = hunger;
+      happinessSpan.innerText = happiness;
+
+      if (hunger === 0 || happiness === 0) {
+        alert('Your Tamagotchi has died. :(');
+        hunger = 100;
+        happiness = 100;
+      }
+    }, 1000);
+  </script>
+</body>
+
+</html>

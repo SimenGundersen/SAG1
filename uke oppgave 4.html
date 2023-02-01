@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Krokodille-spillet</title>
+</head>
+<body>
+    <div id="app"></div>
+
+php
+
+<script>
+    // Model
+    var num1 = Math.floor(Math.random() * 10 + 1);
+    var num2 = Math.floor(Math.random() * 10 + 1);
+    var operator = '';
+    var points = 0;
+
+    // View
+    updateView();
+    function updateView() {
+        document.getElementById('app').innerHTML = `
+            <p>Sammenlign tallene:</p>
+            <p>${num1} og ${num2}</p>
+            <input type="text" id="operator" value="${operator}" placeholder="skriv operator (+, -, *, /)">
+            <br><br>
+            <button onclick="submit()">Submit</button>
+            <button onclick="reset()">Reset</button>
+            <br><br>
+            <p>Poeng: ${points}</p>
+        `;
+    }
+
+    // Controller
+    function submit() {
+        operator = document.getElementById('operator').value;
+        if (eval(`${num1} ${operator} ${num2}`) == (num1 + num2) && operator === '+') {
+            points += 1;
+        } else if (eval(`${num1} ${operator} ${num2}`) == (num1 - num2) && operator === '-') {
+            points += 1;
+        } else if (eval(`${num1} ${operator} ${num2}`) == (num1 * num2) && operator === '*') {
+            points += 1;
+        } else if (eval(`${num1} ${operator} ${num2}`) == (num1 / num2) && operator === '/') {
+            points += 1;
+        } else {
+            points -= 1;
+        }
+        updateView();
+    }
+
+    function reset() {
+        num1 = Math.floor(Math.random() * 10 + 1);
+        num2 = Math.floor(Math.random() * 10 + 1);
+        operator = '';
+        updateView();
+    }
+</script>
+
+</body>
+</html>
