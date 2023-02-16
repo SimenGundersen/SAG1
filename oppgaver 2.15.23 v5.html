@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MVC Color Selector</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      const app = document.getElementById('app');
+      const pocketStuff = ['Hat', 'Pencil', 'Dinosaur', 'Showercap', 'Piece of tape'];
+      let cart = [];
+
+      view();
+
+      function view() {
+        let html = ``;
+        html += `
+            <button onclick="seeWhatsInPockets()">See contents of pockets</button>
+            <br>
+            <button onclick="addToCart()">Add to cart</button>
+        `;
+        app.innerHTML = html;
+      }
+
+      function seeWhatsInPockets() {
+        for (let i = 0; i < pocketStuff.length; i++) {
+          console.log(`On round ${i} of the loop, I see: ${pocketStuff[i]}`);
+        }
+      }
+
+      function addToCart() {
+        let item = prompt('What do you want to add to the cart?');
+        if (item) {
+          cart.push(item);
+          console.log(`${item} added to cart.`);
+          console.log(`Cart contents: ${cart}`);
+        }
+      }
+    </script>
+  </body>
+</html>

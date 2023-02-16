@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <h1>Tic Tac Toe</h1>
+    <div id="board"></div>
+    <button id="restart">Restart</button>
+    <script>
+      const board = ['', '', '', '', '', '', '', '', ''];
+      let winner = '';
+
+      function showBoard() {
+        const boardEl = document.getElementById('board');
+        boardEl.innerHTML = '';
+        for (let i = 0; i < board.length; i++) {
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
+          cell.dataset.index = i;
+          cell.addEventListener('click', function () {
+            if (!winner && board[i] === '') {
+              board[i] = 'x';
+              checkWinning('x');
+              if (!winner) {
+                setRandomO();
+                checkWinning('o');
+              }
+              showBoard();
+            }
+          });
+          if (board[i] === 'x') {
+            const x = document.createElement('span');
+            x.textContent = 'X';
+            cell.appendChild(x);
+          } else if (board[i] === 'o') {
+            const o = document.createElement('span');
+            o.textContent = 'O';
+            cell.appendChild(o);
+          }
+          boardEl.appendChild(cell);
+        }
+        if (winner) {
+          boardEl.insertAdjacentHTML('afterend', '<p>Du vant!</p>');
+        }
+      }
+
+      function setRandomO() {
+        const emptyIndices = Array.from(board.keys()).filter(i => board[i] === '');
+        if (emptyIndices.length > 0) {
+          const index = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
+          board[index] = 'o';
+        }
+      }
+
+      function checkWinning(player) {
+        const winningIndices = [
+          [0, 1, 2],
+          [3, 4, 5],
+          [6, 7, 8],
+          [0, 3, 6],
+          [1, 4, 7],
+          [2, 5, 8],
+          [0, 4, 8],
+          [2, 4, 6],
+        ];
+        for (let i = 0; i < winningIndices.length; i++) {
+          const [a, b, c] = winningIndices[i];
+          if (board[a] === player && board[b] === player && board[c] === player) {
+            winner = player;
+            return;
+          }
+        }
+      }
+
+      function restart() {
+        board.fill('');
+        winner = '';
+        showBoard();
+      }
+
+      document.getElementById('restart').addEventListener('click', restart);
+
+      showBoard();
+    </script>
+    <style>
+      #board {
+        display: flex;
+        flex-wrap: wrap;
+        width: 150px;
+      }
+      .cell {
+        box-sizing: border-box;
+        border: 1px solid black;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </body>

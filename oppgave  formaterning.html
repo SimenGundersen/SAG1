@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>QUnit Example</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src="lib.js"></script>
+    <script>
+QUnit.test("fix - 'Terje'", function (assert) {
+  const actual = fixText('Terje');
+  const expected = 'Terje';
+  assert.equal(actual, expected);
+});
+
+QUnit.test("fix - 'Terje '", function (assert) {
+  const actual = fixText('Terje ');
+  const expected = 'Terje';
+  assert.equal(actual, expected);
+});
+
+QUnit.test("fix - ' Terje'", function (assert) {
+  const actual = fixText(' Terje');
+  const expected = 'Terje';
+  assert.equal(actual, expected);
+});
+
+QUnit.test("fix - ' Terje '", function (assert) {
+  const actual = fixText(' Terje ');
+  const expected = 'Terje';
+  assert.equal(actual, expected);
+});
+
+QUnit.test("fix - ''", function (assert) {
+  const actual = fixText('');
+  const expected = '';
+  assert.equal(actual, expected);
+});
+
+QUnit.test("fix - ' aBC dEf Ghi '", function (assert) {
+  const actual = fixText(' aBC dEf Ghi ');
+  const expected = 'Abc def ghi';
+  assert.equal(actual, expected);
+});
+    
+function fixText(txt) {
+  // Fjern mellomrom først og sist i teksten
+  txt = txt.trim();
+  
+  if (txt.length > 0) {
+    // Gjør første bokstav stor
+    txt = txt.charAt(0).toUpperCase() + txt.slice(1).toLowerCase();
+  }
+  
+  return txt;
+}  
+
+     </script>
+</body>
+</html>

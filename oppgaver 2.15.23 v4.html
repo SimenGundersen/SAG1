@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MVC Color Selector</title>
+  </head>
+  <body>
+
+
+      <div id="app"></div>
+
+
+    <script>
+      const app = document.getElementById('app');
+      const pocektstuff = ['Hat', 'Pencil', 'Dinosaur','Showercap','Piece of tape',];
+    
+    view()
+      function view(){
+        let html = ``;
+        html += `<button onclick ="seeWhatsInPocekts"¨
+              See contents of pockets
+            </button>
+
+            `;
+          app.innerHTML = html;
+      }
+    
+      function seeWhatsInPockets(){
+        for (let i = 0; < pocketStuff.lenght; i++){
+            console.log(`På runde ${i} i loopen så ser jeg: ${pocketstuff[i]}`)
+      }
+    }
+    
+    
+    </script>
+
+  </body>
+</html>

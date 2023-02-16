@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MVC Color Selector</title>
+  </head>
+  <body>
+    <div id="display"></div>
+    <button onclick="multiplyby2()">Multiplyby2</button>
+    <div id="text">Bjarne liker alfabetet</div>
+    <button onclick="getfirstword()">getfirstword</button>
+  </div>
+  <script>
+    function multiplyby2(){
+      let number = 2;
+
+      while(number <=100){
+        number = number *2;
+        document.getElementById('display').innerHTML += number + ' ';
+
+      }
+    }
+    function get firstword(){
+        let text = 'bjarne liker alfabetet';
+        let sperator = '';
+        let firstword = '';
+        let index = 0;
+        while (seperator !== ' '){
+          firstword += text.charAt(index);
+          index++;
+      }
+
+    document.getElementById('text').innerHTML += inputstring + ' ';
+
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lamper</title>
+    <style>
+        .lamp {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: gray;
+            margin: 10px;
+            float: left;
+            border: 2px solid white;
+        }
+        .lightOn {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="lampContainer"></div>
+    <button id="lightButton">Trykk på den lyse lampen</button>
+
+    <script>
+        var model = {
+            selectedLampIndex: null,
+            startTime: null,
+            finishTime: null
+        };
+
+        function init() {
+            // Sett opp lampene
+            var lampContainer = document.getElementById("lampContainer");
+            for (var i = 0; i < 25; i++) {
+                var lamp = document.createElement("div");
+                lamp.classList.add("lamp");
+                lampContainer.appendChild(lamp);
+            }
+
+            // Koble knappen til kontrollerfunksjonen
+            var lightButton = document.getElementById("lightButton");
+            lightButton.onclick = lightButtonClicked;
+
+            // Velg en tilfeldig lampe og vis den som valgt
+            model.selectedLampIndex = Math.floor(Math.random() * 25);
+            updateView();
+        }
+
+        function updateView() {
+            var lamps = document.getElementsByClassName("lamp");
+            for (var i = 0; i < lamps.length; i++) {
+                if (i === model.selectedLampIndex) {
+                    lamps[i].classList.add("lightOn");
+                } else {
+                    lamps[i].classList.remove("lightOn");
+                }
+            }
+        }
+
+        function lightButtonClicked() {
+            // Mål tiden det tok å trykke på lampen
+            model.finishTime = new Date().getTime();
+            var spentMilliseconds = Math.floor(model.finishTime - model.startTime);
+            var spentSeconds = spentMilliseconds / 1000;
+            console.log("Tid brukt: " + spentSeconds + " sekunder");
+
+            // Velg en ny tilfeldig lampe og vis den som valgt
+            model.selectedLampIndex = Math.floor(Math.random() * 25);
+            updateView();
+
+            // Start måling av ny tid
+            model.startTime = new Date().getTime();
+        }
+
+        // Start opp ved lasting av siden
+        model.startTime = new Date().getTime();
+        window.onload = init;
+    </script>
+</body>

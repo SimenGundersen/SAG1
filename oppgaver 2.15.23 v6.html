@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MVC Color Selector</title>
+  </head>
+  <body>
+    <input type="range" min="1" max="100" value="5" onchange="updateMatrix()"/>
+    <div id="multiplicationMatrix"></div>
+    <script>
+        // hjelpevariabler for view og controller
+        let multiplicationMatrixDiv = document.getElementById('multiplicationMatrix');
+
+        // model
+        let columnCount = 5;
+        let multiplicationMatrix = [
+            1, 2, 3, 4, 5,
+            2, 4, 6, 8, 10,
+            3, 6, 9, 12, 15,
+            4, 8, 12, 16, 20,
+            5, 10, 15, 20, 25
+        ];
+
+        // view
+        show();
+        function show() {
+            let html = '';
+            for (let i = 0; i < multiplicationMatrix.length; i++) {
+                let number = multiplicationMatrix[i];
+                html += `<div>${number}</div>`;
+            }
+            multiplicationMatrixDiv.innerHTML = html;
+            multiplicationMatrixDiv.style.display = 'grid';
+            multiplicationMatrixDiv.style.gridTemplateColumns = `repeat(${columnCount},40px)`;
+        }
+
+        // controller
+        function updateMatrix() {
+            let sliderValue = parseInt(document.querySelector('input[type="range"]').value);
+            columnCount = sliderValue;
+            multiplicationMatrix = [];
+            for (let i = 1; i <= sliderValue; i++) {
+                for (let j = 1; j <= sliderValue; j++) {
+                    multiplicationMatrix.push(i * j);
+                }
+            }
+            show();
+        }
+    </script>
+</body>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MVC Color Selector</title>
+  </head>
+
+<script>
+
+  function isEmail(text) {
+  // Sjekk om teksten inneholder @ og ikke har mellomrom
+  if (text.indexOf('@') === -1 || text.indexOf(' ') !== -1) {
+    return false;
+  }
+  // Sjekk om teksten har et punktum før @ og et punktum etter
+  const parts = text.split('@');
+  if (parts[0].lastIndexOf('.') < parts[0].length - 2 ||
+      parts[1].indexOf('.') === -1 || parts[1].lastIndexOf('.') === parts[1].length - 1) {
+    return false;
+  }
+  return true;
+}
+
+// Tester
+QUnit.test("isEmail - 'foo@bar.com'", function(assert) {
+  assert.ok(isEmail('foo@bar.com'), 'should return true');
+});
+
+QUnit.test("isEmail - 'foo@bar'", function(assert) {
+  assert.notOk(isEmail('foo@bar'), 'should return false');
+});
+
+QUnit.test("isEmail - 'foo bar@baz.com'", function(assert) {
+  assert.notOk(isEmail('foo bar@baz.com'), 'should return false');
+});
+
+QUnit.test("isEmail - 'foo.@baz@com'", function(assert) {
+  assert.notOk(isEmail('foo.@baz@com'), 'should return false');
+});
+
+QUnit.test("isEmail - 'foo.baz@com.'", function(assert) {
+  assert.notOk(isEmail('foo.baz@com.'), 'should return false');
+});
+
+QUnit.test("isEmail - 'foo.baz@com'", function(assert) {
+  assert.ok(isEmail('foo.baz@com'), 'should return true');
+});
+
+</script>
+
+
+
+  <body>
+  
+
+  </body>
+  </html>

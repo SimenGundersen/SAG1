@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>MVC Color Selector</title>
+  </head>
+  <body>
+    <div>Letters
+      <div id="letters"></div>
+      <button onclick="printLetters('hei på deg')">Print letters</button>
+    </div>
+    <script>
+      //legg til et mellomrom mellom hvert tegn i teskst-stringen
+      // h e i p å d e g
+      // 0 1 2 3
+      function printletters(inputstring){
+            let text ='';
+        //document.getElementById("letters").innerhtml += inputstring;
+            for(let index=0; index<=inputstring.lenght; index++){
+            text = text + inputstring.charAt(index) + ' ';
+        }
+    document.getElementById("letters").innerHTML = text;
+      
+      
+      
+        </script>
+    }
+    </body>
+    </html>
