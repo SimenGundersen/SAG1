@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="range" min="1" max="20" step="1" oninput="initModel(this.value); updateView();" />
+    <div id="app"></div>
+    <script>
+
+        var mazeModel = {
+            size: 2,
+            rows: [
+                [
+                    { isHigh: false, isWide: false, isOpen: false },
+                    { isHigh: false, isWide: true, isOpen: false },
+                    { isHigh: false, isWide: false, isOpen: false },
+                    { isHigh: false, isWide: true, isOpen: false },
+                    { isHigh: false, isWide: false, isOpen: false },
+                ],
+                [
+                    { isHigh: true, isWide: false, isOpen: false },
+                    { isHigh: true, isWide: true },
+                    { isHigh: true, isWide: false, isOpen: false },
+                    { isHigh: true, isWide: true },
+                    { isHigh: true, isWide: false, isOpen: false },
+                ],
+                [
+                    { isHigh: false, isWide: false, isOpen: false },
+                    { isHigh: false, isWide: true, isOpen: false },
+                    { isHigh: false, isWide: false, isOpen: false },
+                    { isHigh: false, isWide: true, isOpen: false },
+                    { isHigh: false, isWide: false, isOpen: false },
+                ],
+                [
+                    { isHigh: true, isWide: false, isOpen: false },
+                    { isHigh: true, isWide: true },
+                    { isHigh: true, isWide: false, isOpen: false },
+                    { isHigh: true, isWide: true },
+                    { isHigh: true, isWide: false, isOpen: false },
+                ],
+                [
+                    { isHigh: false, isWide: false, isOpen: false },
+                    { isHigh: false, isWide: true, isOpen: false },
+                    { isHigh: false, isWide: false, isOpen: false },
+                    { isHigh: false, isWide: true, isOpen: false },
+                    { isHigh: false, isWide: false, isOpen: false },
+                ],
+            ]
+        };
+
+        updateView();
+        function updateView() {
+            document.getElementById('app').innerHTML = `
+                <table>
+                    ${mazeModel.rows.map((row, rowIndex) => `
+                    <tr>
+                        ${row.map((col, colIndex) => `
+                        <td onclick="toggle(${rowIndex}, ${colIndex})" class="${getCssClass(col)}">
+                        </td>
+                        `).join('')}
+                    </tr>    
+                    `).join('')}
+                </table>
+            `;
+        }
+
+        function getCssClass(square) {
+            if (square.isHigh && square.isWide) return 'room';
+            const highLow = square.isHigh ? 'high ' : 'low ';
+            const wideSmall = square.isWide ? 'wide ' : 'small ';
+            const wall = square.isOpen ? 'noWall ' : 'wall ';
+            return highLow + wideSmall + wall;
+        }
+
+        function initModel(size) {
+            mazeModel.rows = [];
+            for (let rowIndex = 0; rowIndex < size; rowIndex++) {
+                mazeModel.rows.push(createRow(size, false));
+                mazeModel.rows.push(createRow(size, true));
+            }
+            mazeModel.rows.push(createRow(size, false));
+
+            closeRow(0);
+            closeRow(mazeModel.rows.length - 1);
+            closeColumn(0);
+            closeColumn(mazeModel.rows.length - 1);
+        }
+
+        function closeRow(index) {
+            const row = mazeModel.rows[index];
+            for (let cell of row) {
+                cell.isOpen = false;
+            }
+        }
+
+        function closeColumn(index) {
+            for (let row of mazeModel.rows) {
+                row[index].isOpen = false;
+            }
+        }
+
+        function createRow(size, isHigh) {
+            const row = [];
+            for (let colIndex = 0; colIndex < size; colIndex++) {
+                row.push(createCell(isHigh, false));
+                row.push(createCell(isHigh, true));
+            }
+            row.push(createCell(isHigh, false));
+            return row;
+        }
+
+        function createCell(isHigh, isWide) {
+            if (isHigh === isWide) return { isHigh, isWide };
+            const isOpen = Math.random() < 0.5;
+            return { isHigh, isWide, isOpen };
+        }
+
+        function toggle(rowIndex, colIndex) {
+            const cell = mazeModel.rows[rowIndex][colIndex];
+            if (cell.isOpen === undefined) return;
+            cell.isOpen = !cell.isOpen;
+            updateView();
+        }
+    </script>
+</body>
+
+</html>
